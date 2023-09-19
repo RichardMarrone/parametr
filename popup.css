@@ -1,4 +1,17 @@
-.param-table, .param-table th, .param-table td {
-    min-width: 150px;
+/* .param-table{
+    border-collapse: collapse;
+}
+
+.param-table tr {
     border: 2px solid;
+} */
+
+.param-table th {
+    width: 200px;
+}
+
+.param-table .param, .param-table .value {
+    width: 200px;
+    border: 0.5px solid grey;
+    border-radius: 10px;
 }
