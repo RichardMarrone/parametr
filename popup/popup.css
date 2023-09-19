@@ -1,0 +1,48 @@
+.param-table{
+    /* border-collapse: collapse; */
+    /* table-layout: fixed; */
+}
+
+/* .param-table tr {
+    border: 2px solid;
+} */
+
+.bottom-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.bottom-container button {
+    width: 100px;
+}
+
+th {
+    width: 200px;
+}
+
+.param, .value {
+    min-height: 20px;
+    max-height: 70px;
+    min-width: 100px;
+    max-width: 200px;
+    border: 0.1px solid grey;
+    overflow: auto;
+    border-radius: 4px;
+}
+
+.delete-button button {
+    color: #ffffff;
+    border-radius: 4px;
+    background-color: rgb(202, 60, 60);
+    border-color: rgb(202, 60, 60);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.edit-button button, .save-button button {
+    color: #ffffff;
+    border-radius: 4px;
+    background-color: rgb(27, 27, 27);
+    border-color: rgb(27, 27, 27);
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
