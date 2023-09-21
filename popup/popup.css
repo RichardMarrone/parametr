@@ -1,12 +1,3 @@
-.param-table{
-    /* border-collapse: collapse; */
-    /* table-layout: fixed; */
-}
-
-/* .param-table tr {
-    border: 2px solid;
-} */
-
 .bottom-container {
     display: flex;
     justify-content: space-around;

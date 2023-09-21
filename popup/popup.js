@@ -3,10 +3,6 @@ TODO:
     - truncute url in preview or start wrapping at lower width
     - error handling
     - Make CSS look nice
-Nice to have:
-    - refactoring
-    - settings pane
-    - better readme
 */
 
 // Globals
@@ -137,7 +133,6 @@ goButton.addEventListener('click', () => {
     const newUrl = globalUrlObject.toString();
     getCurrentTab().then(tab => {
         chrome.tabs.create({url: newUrl});
-        // chrome.tabs.update(undefined, { url: newUrl }); // update and navigate
-    })
+    });
 });
 

@@ -1,11 +1,11 @@
 {
-    "name": "requestr",
-    "description": "Edit URL params in the browser with ease",
+    "name": "parametr",
+    "description": "A chrome extension for parsing url search params",
     "version": "1.0",
     "manifest_version": 3,
     "action": {
       "default_popup": "popup/popup.html",
-      "default_icon": "icons/hello_extensions.png"
+      "default_icon": "icons/parameter.png"
     },
     "permissions": [
         "tabs"
