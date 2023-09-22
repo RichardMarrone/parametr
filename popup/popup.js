@@ -122,6 +122,13 @@ addParamButton.addEventListener('click', () => {
     table.appendChild(row);
 });
 
+goButton.addEventListener('click', () => {
+    const newUrl = globalUrlObject.toString();
+    getCurrentTab().then(tab => {
+        chrome.tabs.create({url: newUrl});
+    });
+});
+
 getCurrentTab().then(res => {
     globalUrlObject = new URL(res.url);
     renderUrl();
@@ -129,10 +136,4 @@ getCurrentTab().then(res => {
     generateTable(currentSearchParams);
 })
 
-goButton.addEventListener('click', () => {
-    const newUrl = globalUrlObject.toString();
-    getCurrentTab().then(tab => {
-        chrome.tabs.create({url: newUrl});
-    });
-});
 

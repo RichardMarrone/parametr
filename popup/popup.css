@@ -10,6 +10,27 @@
 
 th {
     width: 200px;
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-size: 1.0rem;
+    line-height: 1.5rem;
+    letter-spacing: 0.01071em;
+    display: table-cell;
+    vertical-align: inherit;
+    border-bottom: 1px solid rgba(224, 224, 224, 1);
+    text-align: left;
+    color: rgba(0, 0, 0, 0.87);
+}
+
+td {
+    font-family: "Roboto","Helvetica","Arial",sans-serif;
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.43;
+    letter-spacing: 0.01071em;
+    display: table-cell;
+    vertical-align: inherit;
+    border-bottom: 1px solid rgba(224, 224, 224, 1);
+    color: rgba(0, 0, 0, 0.87);
 }
 
 .param, .value {
@@ -17,23 +38,40 @@ th {
     max-height: 70px;
     min-width: 100px;
     max-width: 200px;
+
+}
+
+.param[contenteditable="true"], .value[contenteditable="true"] {
     border: 0.1px solid grey;
     overflow: auto;
-    border-radius: 4px;
 }
 
 .delete-button button {
+    background-color: #f44336;
+    border-color: #f44336;;
     color: #ffffff;
     border-radius: 4px;
-    background-color: rgb(202, 60, 60);
-    border-color: rgb(202, 60, 60);
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.delete-button button:hover {
+    background-color: #d32f2f;
+    border-color: #d32f2f;
 }
 
 .edit-button button, .save-button button {
+    background-color: #2196F3;
+    border-color: #2196F3;;
     color: #ffffff;
     border-radius: 4px;
-    background-color: rgb(27, 27, 27);
-    border-color: rgb(27, 27, 27);
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+}
+
+.edit-button button:hover, .save-button button:hover {
+    background-color: #0e83e1;
+    border-color: #0e83e1;
+}
+
+.add-param-btn, .go-btn {
+    background-color: #0e83e1;
+    border-color: #0e83e1;
+    color: #ffffff;
 }
