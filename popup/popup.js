@@ -1,7 +1,7 @@
 // Globals
 const table = document.querySelector('.param-table tbody');
 const addParamButton = document.querySelector('.add-param-btn');
-const urlDisplay = document.querySelector('.current-url');
+const urlDisplay = document.querySelector('.current-url p');
 const goButton = document.querySelector('.go-btn');
 let globalUrlObject = null;
 

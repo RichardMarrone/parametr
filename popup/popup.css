@@ -1,8 +1,6 @@
-.bottom-container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin-top: 20px;
+.current-url p{
+    max-width: 350px;
+    overflow-wrap: break-word;
 }
 
 th {
@@ -44,12 +42,24 @@ td.row-buttons-section {
     max-height: 70px;
     min-width: 100px;
     max-width: 200px;
+    overflow: hidden;
 
 }
 
 .param[contenteditable="true"], .value[contenteditable="true"] {
     border: 0.1px solid grey;
     overflow: auto;
+}
+
+.edit-button:hover, .save-button:hover, .delete-button:hover {
+    cursor: pointer;
+}
+
+.bottom-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin-top: 20px;
 }
 
 .go-btn, .add-param-btn {
@@ -64,8 +74,4 @@ td.row-buttons-section {
 .go-btn p, .add-param-btn p {
     font-size: 18px;
     margin-right: 6px;
-}
-
-.edit-button:hover, .save-button:hover, .delete-button:hover {
-    cursor: pointer;
 }
