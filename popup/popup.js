@@ -1,10 +1,3 @@
-/*
-TODO:
-    - truncute url in preview or start wrapping at lower width
-    - error handling
-    - Make CSS look nice
-*/
-
 // Globals
 const table = document.querySelector('.param-table tbody');
 const addParamButton = document.querySelector('.add-param-btn');
@@ -44,18 +37,14 @@ function generateTableRow(param='', value='') {
         <td>
             <div ${userAddedRow ? `contenteditable='true'`: `history='${value}'`} class="value">${value}</div>
         </td>
-        <td class="edit-button" ${userAddedRow ? `style="display:none;"`: ''}>
-            <button>Edit</button>
-        </td>
-        <td class="save-button" ${userAddedRow ? '': `style="display:none;"`}>
-            <button>Save</button>
-        </td>        
-        <td class="delete-button">
-            <button>Remove</button>
+        <td class="row-buttons-section">
+            <div class="edit-button fa-solid fa-pen-to-square" ${userAddedRow ? `style="display:none;"`: ''}></div>
+            <div class="save-button fa-solid fa-floppy-disk" ${userAddedRow ? '': `style="display:none;"`}></div>        
+            <div class="delete-button fa-solid fa-trash-can"></div>
         </td>
     </tr>
     `;
-
+    // class="fa-solid fa-pen-to-square"
     const thisParam = row.querySelector('.param');
     const thisValue = row.querySelector('.value');
     const deleteButton = row.querySelector('.delete-button');
@@ -82,26 +71,25 @@ function generateTableRow(param='', value='') {
     saveButton.addEventListener('click', () => {
         const thisParamBefore = thisParam.getAttribute('history') ?? '';
         const thisValueBefore = thisValue.getAttribute('history') ?? '';
-        console.log(`Param history: ${thisParamBefore} value history: ${thisValueBefore}`);
         editButton.style.display = '';
         thisParam.setAttribute('contenteditable', 'false');
         thisValue.setAttribute('contenteditable', 'false');
 
         if (thisParam.textContent != thisParamBefore || thisValue.textContent != thisValueBefore) {
-            // if we changed an existing value, delete the old
+            // if we changed an existing value, delete the old, add new, update history attr
             if (globalUrlObject) {
                 globalUrlObject.searchParams.delete(thisParamBefore, thisValueBefore);
             }
-        }
 
-        if (globalUrlObject && thisParam.textContent) {
-            // we can have blank values but we at least need param
-            globalUrlObject.searchParams.append(thisParam.textContent, thisValue.textContent);
+            if (globalUrlObject && thisParam.textContent) {
+                // we can have blank values but we at least need param
+                globalUrlObject.searchParams.append(thisParam.textContent, thisValue.textContent);
+            }
+    
+            // update history
+            thisParam.setAttribute('history', thisParam.textContent);
+            thisValue.setAttribute('history', thisValue.textContent);
         }
-
-        // update history
-        thisParam.setAttribute('history', thisParam.textContent);
-        thisValue.setAttribute('history', thisValue.textContent);
 
         saveButton.style.display = 'none';
         renderUrl();
