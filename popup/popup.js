@@ -13,7 +13,10 @@ async function getCurrentTab() {
   }
 
 function renderUrl() {
-    urlDisplay.innerHTML = globalUrlObject ? globalUrlObject.toString(): '';
+    if (globalUrlObject) {
+        urlDisplay.innerHTML = globalUrlObject.toString()
+        urlDisplay.setAttribute('title', globalUrlObject.toString());
+    }
 }
 
 function generateTableRow(param='', value='') {
