@@ -19,6 +19,18 @@ function renderUrl() {
     }
 }
 
+function deleteOne(params, key, value) {
+    // For example when we have a=1 and a=1, we only want to delete
+    // one of these. Specifying calling default delete('a', '1') deletes both
+    if (!params.has(key,value)) {
+        return;
+    }
+    const allKeys = params.getAll(key).filter(entry => entry == value);
+    params.delete(key, value);
+    allKeys.pop();
+    allKeys.forEach(entry => params.append(key, entry));
+}
+
 function generateTableRow (param='', value='') {
     const row = document.createElement('tr');
     const userAddedRow = !param && !value;
@@ -52,9 +64,8 @@ function generateTableRow (param='', value='') {
         const thisValueBefore = thisValue.getAttribute('history') ?? '';
 
         if (thisParam.textContent != thisParamBefore || thisValue.textContent != thisValueBefore) {
-            // if we changed an existing value, delete the old, add new, update history attr
             if (globalUrlObject) {
-                globalUrlObject.searchParams.delete(thisParamBefore, thisValueBefore);
+                deleteOne(globalUrlObject.searchParams, thisParamBefore, thisValueBefore);
             }
 
             if (globalUrlObject && thisParam.textContent) {
@@ -81,8 +92,7 @@ function generateTableRow (param='', value='') {
 
     deleteButton.addEventListener('click', () => {
         if (globalUrlObject) {
-            // We send value as well for the cases where there are params with the same name
-            globalUrlObject.searchParams.delete(thisParam.textContent, thisValue.textContent);
+            deleteOne(globalUrlObject.searchParams, thisParam.textContent, thisValue.textContent);
         }
         renderUrl();
         row.remove();
