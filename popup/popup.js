@@ -19,37 +19,64 @@ function renderUrl() {
     }
 }
 
-function generateTableRow (param='', value='') {
+function generateTableRow(param='', value='') {
+    /*
+    create row of this form and append to global parameters table
+    if we pass param and value, it was parsed from the current url
+    so we display those values. If they are empty we know the user
+    has just added a new row.
+    --------------------------------------------
+    - param | value | (Remove) | (Edit / Save) -
+    --------------------------------------------
+    */
     const row = document.createElement('tr');
     const userAddedRow = !param && !value;
 
     row.innerHTML =`
     <tr>
         <td>
-            <div contenteditable='true' ${userAddedRow ? '': `history='${param}'`} class="param">${param}</div>
+            <div ${userAddedRow ? `contenteditable='true'`: `history='${param}'`} class="param">${param}</div>
         </td>
         <td>
-            <div contenteditable='true' ${userAddedRow ? '': `history='${value}'`} class="value">${value}</div>
+            <div ${userAddedRow ? `contenteditable='true'`: `history='${value}'`} class="value">${value}</div>
         </td>
         <td class="row-buttons-section">
+            <div class="edit-button fa-solid fa-pen-to-square" ${userAddedRow ? `style="display:none;"`: ''}></div>
+            <div class="save-button fa-solid fa-floppy-disk" ${userAddedRow ? '': `style="display:none;"`}></div>        
             <div class="delete-button fa-solid fa-trash-can"></div>
         </td>
     </tr>
     `;
+    // class="fa-solid fa-pen-to-square"
     const thisParam = row.querySelector('.param');
     const thisValue = row.querySelector('.value');
     const deleteButton = row.querySelector('.delete-button');
+    const editButton = row.querySelector('.edit-button');
+    const saveButton = row.querySelector('.save-button');
 
-    thisParam.addEventListener('click', () => thisParam.focus());
-    thisValue.addEventListener('click', () => thisValue.focus());
+    deleteButton.addEventListener('click', () => {
+        if (globalUrlObject) {
+            // We send value as well for the cases where there are params with the same name
+            globalUrlObject.searchParams.delete(thisParam.textContent, thisValue.textContent);
+        }
+        renderUrl();
+        row.remove();
+    });
+    
+    editButton.addEventListener('click', () => {
+        saveButton.style.display = '';
+        thisParam.setAttribute('contenteditable', 'true');
+        thisValue.setAttribute('contenteditable', 'true');
+        editButton.style.display = 'none';
+        renderUrl();
+    });
 
-    let paramTimeout;
-    let valueTimeout;
-    const debounceInterval = 10;
-
-    const onTextChanged = () => {
+    saveButton.addEventListener('click', () => {
         const thisParamBefore = thisParam.getAttribute('history') ?? '';
         const thisValueBefore = thisValue.getAttribute('history') ?? '';
+        editButton.style.display = '';
+        thisParam.setAttribute('contenteditable', 'false');
+        thisValue.setAttribute('contenteditable', 'false');
 
         if (thisParam.textContent != thisParamBefore || thisValue.textContent != thisValueBefore) {
             // if we changed an existing value, delete the old, add new, update history attr
@@ -65,27 +92,10 @@ function generateTableRow (param='', value='') {
             // update history
             thisParam.setAttribute('history', thisParam.textContent);
             thisValue.setAttribute('history', thisValue.textContent);
-            renderUrl();
         }
-    };
 
-    thisParam.addEventListener('keyup',() => {
-        clearTimeout(paramTimeout);
-        paramTimeout = setTimeout(onTextChanged, debounceInterval);
-    });
-
-    thisValue.addEventListener('keyup',() => {
-        clearTimeout(valueTimeout);
-        valueTimeout = setTimeout(onTextChanged, debounceInterval);
-    });
-
-    deleteButton.addEventListener('click', () => {
-        if (globalUrlObject) {
-            // We send value as well for the cases where there are params with the same name
-            globalUrlObject.searchParams.delete(thisParam.textContent, thisValue.textContent);
-        }
+        saveButton.style.display = 'none';
         renderUrl();
-        row.remove();
     });
 
     return row;
@@ -115,4 +125,6 @@ getCurrentTab().then(res => {
     renderUrl();
     const currentSearchParams = globalUrlObject.searchParams;
     generateTable(currentSearchParams);
-});
+})
+
+
