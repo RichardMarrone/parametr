@@ -46,18 +46,16 @@ td.row-buttons-section {
 .param, .value {
     min-height: 20px;
     max-height: 70px;
-    min-width: 100px;
+    min-width: 200px;
     max-width: 200px;
     overflow: hidden;
-
 }
 
-.param[contenteditable="true"], .value[contenteditable="true"] {
-    border: 0.1px solid grey;
+.param:focus, .value:focus {
     overflow: auto;
 }
 
-.edit-button:hover, .save-button:hover, .delete-button:hover {
+.delete-button:hover {
     cursor: pointer;
 }
 
