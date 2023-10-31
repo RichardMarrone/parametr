@@ -1,6 +1,8 @@
 # Parametr
 A chrome extension for working with url query params. Parametr parses the current tab's URL query parameters into a table where you can edit, add, and delete them. All values will be automatically URL encoded upon adding/editing the current URL. Simply click anywhere in the table to start editing!
 
+You can install from the Google Chrome Store [here](https://chrome.google.com/webstore/detail/parametr/bhdceamjdfafjebhbioafinhomkfimha)
+
 ### Authors
 Richard Marrone and Jeff Wisnewski
 
